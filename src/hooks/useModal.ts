@@ -5,12 +5,12 @@ import { showModal as show, hideModal } from '../store/modalSlice';
 
 export const useModal = () => {
   const dispatch = useDispatch();
-  const { showModal, type } = useSelector((state: RootState) => state.modal);
+  const { showModal, modalChild } = useSelector((state: RootState) => state.modal);
 
   return {
     isModalOpen: showModal,
-    type,
-    showModal: (type: string) => dispatch(show(type)),
+    modalChild,
+    showModal: (modalChild: string) => dispatch(show(modalChild)),
     hideModal: () => dispatch(hideModal()),
   };
 };

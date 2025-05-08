@@ -3,6 +3,7 @@ import modalReducer from './modalSlice';
 import siteReducer from './siteSlice';
 import pageReducer from './pageSlice';
 import folderReducer from './folderSlice';
+import layoutReducer from './mainLayoutSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     sites: siteReducer,
     pages: pageReducer,
     folders: folderReducer,
+    layout: layoutReducer,
   },
 })
 

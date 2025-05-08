@@ -4,8 +4,8 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css'; // Default theme
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
-import Home from '@/pages/Home';
-import DefaultPage from '@/pages/DefaultPage';
+import Home from '@/components/sliderPages/Home';
+import DefaultPage from '@/components/sliderPages/DefaultPage';
 import { setCurrentPage } from '@/store/pageSlice';
 import {getAllItems} from '@/store/selectors';
 

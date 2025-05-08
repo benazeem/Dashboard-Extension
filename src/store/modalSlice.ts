@@ -3,12 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ModalState {
   showModal: boolean;
-  type: string | null;
+  modalChild: string | null;
 }
 
 const initialState: ModalState = {
   showModal: false,
-  type: null,
+  modalChild: null,
 };
 
 export const modalSlice = createSlice({
@@ -17,11 +17,11 @@ export const modalSlice = createSlice({
   reducers: {
     showModal(state, action: PayloadAction<string>) {
       state.showModal = true;
-      state.type = action.payload;
+      state.modalChild = action.payload;
     },
     hideModal(state) {
       state.showModal = false;
-      state.type = null;
+      state.modalChild = null;
     },
   },
 });

@@ -1,18 +1,32 @@
-import { CircleX } from "lucide-react";
+import { CircleX, icons } from "lucide-react";
 import { useRef, useEffect } from "react";
 import { useState } from "react";
 import {AnimatePresence, motion} from "motion/react";
+import useMainLayout from "@/hooks/useMainLayout";
 
 interface SidebarProps {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Sidebar({setShow}:SidebarProps) {
-    const sidebarRef = useRef<HTMLDivElement>(null)
+    const sidebarRef = useRef<HTMLDivElement>(null);
+    const {updateMainLayout} = useMainLayout();
     const toolsByProfile = {
-        developer: ["Code Editor", "Debugger", "Version Control"],
-        designer: ["Canvas", "Color Picker", "Typography Tool"],
-        marketer: ["Analytics Dashboard", "SEO Tool", "Campaign Manager"],
+        developer: [
+            { name: "Code Editor", icon: "code", id: "code-editor" },
+            { name: "Debugger", icon: "bug", id: "debugger" },
+            { name: "Version Control", icon: "git-branch", id: "version-control" }
+        ],
+        designer: [
+            { name: "Canvas", icon: "layout", id: "canvas" },
+            { name: "Color Picker", icon: "palette", id: "color-picker" },
+            { name: "Typography Tool", icon: "type", id: "typography-tool" }
+        ],
+        marketer: [
+            { name: "Analytics Dashboard", icon: "bar-chart", id: "analytics-dashboard" },
+            { name: "SEO Tool", icon: "search", id: "seo-tool" },
+            { name: "Campaign Manager", icon: "megaphone", id: "campaign-manager" }
+        ]
     }
     const [selectedProfile, setSelectedProfile] = useState<keyof typeof toolsByProfile>("developer");
     const handleClose = () => {
@@ -62,7 +76,7 @@ function Sidebar({setShow}:SidebarProps) {
                     <div className="p-4">
                         <ul className="text-white list-none flex flex-col gap-2 justify-evenly ">
                             {toolsByProfile[selectedProfile].map((tool) => (
-                                <li key={tool}>{tool}</li>
+                                <li key={tool.id} onClick={()=>updateMainLayout(tool.id)} className="cursor-pointer">{tool.name}</li>
                             ))}
                         </ul>
                     </div>

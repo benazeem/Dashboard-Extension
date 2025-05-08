@@ -1,5 +1,5 @@
-import Draggable from "../components/dnd-kit/DraggableItem";
-import Droppable  from "../components/dnd-kit/Droppable"
+import Draggable from "@/components/dnd-kit/DraggableItem";
+import Droppable  from "@/components/dnd-kit/Droppable"
 // import { BorderLeft, BorderRight } from "../components/BorderRightandLeft";
 
 function DefaultPage({page,pagesItems}) {
@@ -18,7 +18,6 @@ function DefaultPage({page,pagesItems}) {
                    />
                  );
                }})}
-
             </Droppable>
         </>
   )
