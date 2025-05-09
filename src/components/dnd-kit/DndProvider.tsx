@@ -115,13 +115,11 @@ const DndProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
  
 
   const handleDragOver = (event: DragOverEvent) => {
-    const { over, active,delta } = event;
+    const { over, active } = event;
 
     if (!over) return;
     const overId = over.id as string;
     const activeId = active.id as string;
-
-    console.log("Over Event",event)
     
     if (overId.startsWith("drop-") && activeId !== overId.slice(5)) {
      return;
@@ -155,7 +153,6 @@ const DndProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     if(!overId.startsWith("drop-")){  
       //Function if dragged to extreme right
         if (delta.x + (active.data.current?.x*WIDGET_HEIGHT) > DROPPABLE_AREA_WIDTH - 50) {
-          console.log("Extreme right")
         handleDragToExtremeRight(event);
         return;
             }
@@ -169,8 +166,7 @@ const DndProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }
 
   const handleDragEnd = (event: DragEndEvent) => {
-    console.log("Drag End Event",event)
-    const { active, over, delta } = event;
+    const { active, over} = event;
     if (!over) return;
     const activeId = active.id as string;
     const overId = over.id as string;
@@ -266,6 +262,7 @@ const DndProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
          nonWidgetItems.filter((item) => item.id === currentActiveId).map((item) => (
           item.type === "site"?(
             <SiteWidget
+              key={item.id}
               id={item.id}
               icon={item.icon}
               url={item.url}

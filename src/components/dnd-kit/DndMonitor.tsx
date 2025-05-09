@@ -32,6 +32,7 @@ const DndMonitor = ({ handleDragOver, handleDragMove, handleDragEnd, handleDragA
     },
     onDragPending(event) {
       // Handle drag pending event if needed
+      console.log('Drag pending:', event);
     }
   });
 

@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Chrome Dashboard Extension",
+  "version": "1.0.0",
+  "description": "A simple dashboard Chrome extension",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "bookmarks",
+    "history",
+    "storage",
+    "scripting",
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": ["https://*/*", "http://*/*"],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*","assets/*.worker.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  }
+}

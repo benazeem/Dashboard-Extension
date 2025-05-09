@@ -1,7 +1,7 @@
-// SimpleSlider.jsx
-import { useRef, useEffect } from 'react';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css'; // Default theme
+import { useRef, useEffect, useMemo } from 'react';
+import { Splide, SplideSlide } from '../../node_modules/@splidejs/react-splide';
+// import '../../node_modules/@splidejs/react-splide/dist/css/splide.min.css'; // Default theme
+import '../../node_modules/@splidejs/react-splide/dist/css/themes/splide-skyblue.min.css'; // Custom theme
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
 import Home from '@/components/sliderPages/Home';
@@ -16,10 +16,13 @@ const SimpleSlider = () => {
     const { pages, currentPage} = useSelector(
       (state: RootState) => state.pages
     );
+    
     //  const widgetItems = useSelector((state: RootState) => state.widgetItems);
+    const memoizedItems = useMemo(() => items, [items]);
+
   
-    const homeItems = items.filter((item) => item.parent === "home");
-    const pagesItems: any[] = items.filter((item) =>
+    const homeItems = memoizedItems.filter((item) => item.parent === "home");
+    const pagesItems: any[] = memoizedItems.filter((item) =>
       item.parent.startsWith("page-")
     );
 
@@ -73,12 +76,13 @@ const SimpleSlider = () => {
         drag: false,
         arrows: false,
         speed: 500,
-        pagination: {
-            el:'.splide__pagination',
-            classNames: 'splide__pagination',
-            clickable: true,
-            paginationDirection: 'ltr',
-        },
+        // pagination: {
+        //     el:'.splide__pagination',
+        //     classNames: 'splide__pagination',
+        //     clickable: true,
+        //     paginationDirection: 'ltr',
+        // },
+        pagination: true,
         }}
         aria-label="Simple React Splide Slider"
         className="splide h-[100%] w-full"

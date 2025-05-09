@@ -1,5 +1,6 @@
 import {FolderType} from '@/store/folderSlice';
 import { SiteItem } from "@/store/siteSlice"; 
+import {Page as PageType} from "@/store/pageSlice";
 
 type SiteWidgetType = { id:string,icon: string; url: string, name: string, parent:string}
 type FolderWidgetType = {  
@@ -10,4 +11,4 @@ type FolderWidgetType = {
     hoverPreviewItemIcon?: string | null;
 }
 
-export type { SiteItem, FolderType, SiteWidgetType, FolderWidgetType };
+export type { SiteItem, FolderType, SiteWidgetType, FolderWidgetType,PageType };

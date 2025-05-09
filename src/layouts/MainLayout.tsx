@@ -25,18 +25,15 @@ function MainLayout() {
   const { isModalOpen,hideModal, modalChild } = useModal();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const handleCloseAllScreenOverlays = () => {
-    setIsSidebarOpen(false);
-    hideModal();
-  };
 
   const resetTimer = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setShowScreensaver(false);
+    if(isModalOpen) return;
     timeoutRef.current = setTimeout(() => {
-        handleCloseAllScreenOverlays();
+        setIsSidebarOpen(false);
         setShowScreensaver(true);
-    }, 30000); // 1 minute = 60000 ms
+    }, 60000); // 1 minute = 60000 ms
   };
   // Hook into user activity
   useEffect(() => {
@@ -47,7 +44,7 @@ function MainLayout() {
       events.forEach((event) => window.removeEventListener(event, resetTimer));
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, []);
+  });
 
   return (
     <>

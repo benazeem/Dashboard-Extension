@@ -1,4 +1,3 @@
-import axios from 'axios';
 import judge0Client from '@/services/judge0Client';
 
 interface SubmitCodeParams {
@@ -18,7 +17,7 @@ export async function submitCode(params: SubmitCodeParams): Promise<string> {
     language_id: params.language_id,
     source_code: params.source_code,
     stdin: params.stdin,
-    redirect_stderr_to_stdout: true
+    redirect_stderr_to_stdout: true,
   };
 
   try {

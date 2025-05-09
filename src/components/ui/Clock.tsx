@@ -26,10 +26,8 @@ export default function Clock() {
     <div className='flex flex-col justify-center items-center gap-4 font-mono text-[200px] text-white w-full h-full select-none '>
       <div className='flex gap-4 items-start justify-center'>
       {[h,m,s].map((num, index) => (<>
-        {/* <div key={index} className='bg-[#131313] rounded-lg px-2 py-1'> */}
         <div className='flex justify-center items-center' key={`time-${index}`} >
           <SlidingNumber value={num} padStart={true} />
-        {/* </div> */}
         {index < 2 && <div className='text-white/50 text-8xl font-mono'>:</div>}
         </div>
         </>
