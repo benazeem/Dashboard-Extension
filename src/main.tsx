@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App.tsx";
 
-// 👇 Keep this block if you're building for production
 if (import.meta.env.PROD) {
   window.MonacoEnvironment = {
     getWorkerUrl: (_moduleId: string, label: string) => {

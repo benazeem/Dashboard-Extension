@@ -3,7 +3,8 @@ import { resolve } from 'path';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import * as monacoEditorPlugin from 'vite-plugin-monaco-editor'; // Correct import for v1.1.0
+import monacoEditorPlugin from 'vite-plugin-monaco-editor'; // ✅ Correct for CommonJS
+
 
 export default defineConfig({
   plugins: [
