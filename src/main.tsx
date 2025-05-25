@@ -5,8 +5,7 @@ import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App.tsx";
 
-<<<<<<< Updated upstream
-
+// 👇 Keep this block if you're building for production
 if (import.meta.env.PROD) {
   window.MonacoEnvironment = {
     getWorkerUrl: (_moduleId: string, label: string) => {
@@ -18,7 +17,7 @@ if (import.meta.env.PROD) {
         'css': 'css.worker',
         'html': 'html.worker',
         'json': 'json.worker',
-        
+
         // Custom language workers
         'c': 'c.worker',
         'cpp': 'cpp.worker',
@@ -33,17 +32,13 @@ if (import.meta.env.PROD) {
         'perl': 'perl.worker',
         'vb': 'vb.worker'
       };
-      
+
       return chrome.runtime.getURL(`/assets/${workerMapping[label] || 'editor'}.worker.js`);
     },
   };
 }
 
-
-createRoot(document.getElementById('root')!).render(
-=======
 createRoot(document.getElementById("root")!).render(
->>>>>>> Stashed changes
   <StrictMode>
     <Provider store={store}>
       <App />
