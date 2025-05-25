@@ -1,10 +1,11 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { store } from './store/store.ts'
-import { Provider } from 'react-redux'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { store } from "./store/store.ts";
+import { Provider } from "react-redux";
+import "./index.css";
+import App from "./App.tsx";
 
+<<<<<<< Updated upstream
 
 if (import.meta.env.PROD) {
   window.MonacoEnvironment = {
@@ -40,9 +41,12 @@ if (import.meta.env.PROD) {
 
 
 createRoot(document.getElementById('root')!).render(
+=======
+createRoot(document.getElementById("root")!).render(
+>>>>>>> Stashed changes
   <StrictMode>
     <Provider store={store}>
-    <App />
+      <App />
     </Provider>
-  </StrictMode>,
-)
+  </StrictMode>
+);

@@ -213,3 +213,273 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+
+/* analog clock css */
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+.App {
+  font-family: sans-serif;
+}
+
+.clock {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  color: #444;
+  text-align: center;
+}
+
+.clock::after {
+  background: #aaa;
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fff;
+}
+
+.hour_hand {
+  position: absolute;
+  width: 4px;
+  height: 32px;
+  background: #222;
+  top: 30%;
+  left: 49%;
+  transform-origin: bottom;
+}
+
+.min_hand {
+  position: absolute;
+  width: 3px;
+  height: 45px;
+  background: #444;
+  top: 22.5%;
+  left: 49%;
+  transform-origin: bottom;
+}
+
+.sec_hand {
+  position: absolute;
+  width: 2px;
+  height: 60px;
+  background: red;
+  top: 10.5%;
+  left: 50%;
+  transform-origin: bottom;
+}
+
+.clock span {
+  position: absolute;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 700;
+}
+
+.twelve {
+  top: 5px;
+  left: 45%;
+}
+
+.one {
+  top: 10%;
+  right: 26%;
+}
+
+.eleven {
+  top: 10%;
+  left: 26%;
+}
+
+.two {
+  top: 25%;
+  right: 10%;
+}
+
+.three {
+  right: 10px;
+  top: 46%;
+}
+
+.four {
+  right: 22px;
+  top: 64%;
+}
+
+.five {
+  right: 41px;
+  top: 79%;
+}
+
+.six {
+  bottom: 4px;
+  left: 48%;
+}
+
+.seven {
+  left: 48px;
+  top: 79%;
+}
+
+.eight {
+  left: 25px;
+  top: 65%;
+}
+
+.nine {
+  left: 10px;
+  top: 46%;
+}
+
+.ten {
+  top: 25%;
+  left: 10%;
+}
+
+/* analog clock2 css */
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+
+.clock2 {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 30px rgba(219, 212, 212, 0.703);
+  font-size: 16px;
+  background-color: black;
+  color: black;
+  text-align: center;
+}
+
+.clock2::after {
+  background: #aaa;
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid black;
+}
+
+.hour_hand2 {
+  position: absolute;
+  width: 4px;
+  height: 32px;
+  background: #ede2e2;
+  top: 30%;
+  left: 49%;
+  transform-origin: bottom;
+}
+
+.min_hand2 {
+  position: absolute;
+  width: 3px;
+  height: 45px;
+  background: #e9dfdf;
+  top: 22.5%;
+  left: 49%;
+  transform-origin: bottom;
+}
+
+.sec_hand2 {
+  position: absolute;
+  width: 2px;
+  height: 60px;
+  background: red;
+  top: 10.5%;
+  left: 50%;
+  transform-origin: bottom;
+}
+
+.clock2 span {
+  position: absolute;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 700;
+}
+
+.twelve2 {
+  top: 5px;
+  left: 45%;
+  color: #f9f9f9;
+}
+
+.one2 {
+  top: 10%;
+  right: 26%;
+  color: #f9f9f9;
+}
+
+.eleven2 {
+  top: 10%;
+  left: 26%;
+  color: #f9f9f9;
+}
+
+.two2 {
+  top: 25%;
+  right: 10%;
+  color: #f9f9f9;
+}
+
+.three2 {
+  right: 10px;
+  top: 46%;
+  color: #f9f9f9;
+}
+
+.four2 {
+  right: 22px;
+  top: 64%;
+  color: #f9f9f9;
+}
+
+.five2 {
+  right: 41px;
+  top: 79%;
+  color: #f9f9f9;
+}
+
+.six2 {
+  bottom: 4px;
+  left: 48%;
+  color: #f9f9f9;
+}
+
+.seven2 {
+  left: 48px;
+  top: 79%;
+  color: #f9f9f9;
+}
+
+.eight2 {
+  left: 25px;
+  top: 65%;
+  color: #f9f9f9;
+}
+
+.nine2 {
+  left: 10px;
+  top: 46%;
+  color: #f9f9f9;
+}
+
+.ten2 {
+  top: 25%;
+  left: 10%;
+  color: #f9f9f9;
+}
