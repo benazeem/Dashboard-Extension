@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import search from "./icons/search.png";
 import notes from "./icons/notes.png";
 import clock from "./icons/clock.png";
@@ -33,9 +33,9 @@ const clockOptions = [
 const Widgets = () => {
   const [showClockSlider, setShowClockSlider] = useState(false);
   const [clockIndex, setClockIndex] = useState(0);
-  const [addedWidgets, setAddedWidgets] = useState([]);
+  const [addedWidgets, setAddedWidgets] = useState<{ name: string; component: React.JSX.Element }[]>([]);
 
-  const handleWidgetClick = (widgetName) => {
+  const handleWidgetClick = (widgetName:string) => {
     if (widgetName === "Clock") {
       setShowClockSlider(true);
     }

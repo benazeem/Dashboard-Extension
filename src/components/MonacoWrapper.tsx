@@ -15,61 +15,78 @@ export default function MonacoWrapper({
   onMount,
 }: MonacoWrapperProps) {
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
-  const monacoEl = useRef(null);
+  const monacoEl = useRef<HTMLDivElement | null>(null);
 
+  // Only run once on mount
   useEffect(() => {
-    // Check if Monaco is already loaded
-    if (typeof window !== "undefined" && (window as any).monaco) {
-      initMonaco();
-      return;
-    }
+    if (!monacoEl.current) return;
 
-    // Load Monaco scripts
-    const script = document.createElement("script");
-    script.src = "./assets/vs/loader.js";
-    script.async = true;
-    script.onload = () => {
-      (window as any).require.config({
-        paths: { vs: "./assets/vs" },
-      });
-      (window as any).require(["vs/editor/editor.main"], () => {
-        initMonaco();
-      });
-    };
-    document.body.appendChild(script);
+    const editor = monaco.editor.create(monacoEl.current, {
+      value,
+      language,
+      theme: "vs-dark",
+      automaticLayout: true,
+      minimap: { enabled: false },
+      fontSize: 16,
+      fontFamily: "monospace",
+      lineNumbers: "on",
+      contextmenu: true,
+      wordWrap: "on",
+      wrappingIndent: "none",
+      lineDecorationsWidth: 0,
+      glyphMargin: false,
+      renderLineHighlight: "none",
+      trimAutoWhitespace: true,
+      rulers: [],
+      padding: { top: 8, bottom: 8 },
+    });
+
+    editorRef.current = editor;
+
+    editor.onDidChangeModelContent(() => {
+      const currentValue = editor.getValue();
+      if (currentValue !== value) {
+        onChange(currentValue);
+      }
+    });
+
+    // Backspace fix for empty line removal
+    editor.addCommand(monaco.KeyCode.Backspace, () => {
+      const model = editor.getModel();
+      const position = editor.getPosition();
+      if (!model || !position) return;
+
+      const lineContent = model.getLineContent(position.lineNumber);
+      if (lineContent.trim() === "" && position.lineNumber > 1) {
+        const range = new monaco.Range(
+          position.lineNumber - 1,
+          model.getLineMaxColumn(position.lineNumber - 1),
+          position.lineNumber,
+          1
+        );
+        model.pushEditOperations([], [{ range, text: "" }], () => null);
+      } else {
+        editor.trigger("keyboard", "deleteLeft", {});
+      }
+    });
+
+    if (onMount) onMount(editor);
 
     return () => {
-      document.body.removeChild(script);
-      if (editorRef.current) {
-        editorRef.current.dispose();
-      }
+      editor.dispose();
     };
-  }, []);
+  }, [language]); // only language affects re-init
 
-  const initMonaco = () => {
-    if (monacoEl.current) {
-      editorRef.current = monaco.editor.create(monacoEl.current, {
-        value,
-        language,
-        theme: "vs-dark",
-        automaticLayout: true,
-        minimap: { enabled: false },
-        fontSize: 16,
-        lineNumbers: "on",
-        scrollBeyondLastLine: false,
-        wordWrap: "on",
-        wrappingIndent: "same",
-      });
+  // Sync editor value with external value (but only if changed)
+  useEffect(() => {
+    const editor = editorRef.current;
+    if (!editor) return;
 
-      editorRef.current.onDidChangeModelContent(() => {
-        onChange(editorRef.current?.getValue() || "");
-      });
-
-      if (onMount) {
-        onMount(editorRef.current);
-      }
+    const current = editor.getValue();
+    if (value !== current) {
+      editor.setValue(value);
     }
-  };
+  }, [value]);
 
   return <div style={{ height: "100%", width: "100%" }} ref={monacoEl} />;
 }

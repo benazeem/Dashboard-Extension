@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import * as monaco from "monaco-editor";
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import MonacoWrapper from "../components/MonacoWrapper"; // Your new wrapper
 import languageOptions from "../data/languageOptions.json";
 import { Button } from "@/components/ui/button";
@@ -93,7 +93,7 @@ function CodeEditor() {
           </Button>
         </div>
       </div>
-      <div className="h-[94dvh] w-full flex items-center justify-center">
+      <div className="h-[94dvh] w-full flex items-center justify-center text-left">
       <MonacoWrapper
         language={language}
         value={code}

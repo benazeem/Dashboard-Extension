@@ -1,4 +1,3 @@
-import React from "react";
 import popularLinks from "../addmenu/popularLinks.json";
 
 const PopularSites = () => {

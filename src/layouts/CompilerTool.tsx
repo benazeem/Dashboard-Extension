@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import compilerOptions from "../data/languageOptions.json";
-import Editor from "@monaco-editor/react";
-import * as monaco from "monaco-editor";
+import MonacoWrapper from "../components/MonacoWrapper"; // Your new wrapper
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { Button } from "@/components/ui/button";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { submitCode, getSubmissionResult } from "@/utils/compileCode";
@@ -268,15 +268,13 @@ export default function CompilerTool() {
 
       <div className="flex flex-1 overflow-hidden">
         {/* Code editor pane */}
-        <div className="w-1/2 bg-gray-900">
-          <Editor
-           key={selectedLanguage}
-            theme="vs-dark"
+        <div className="w-1/2 bg-gray-900 text-left text-white overflow-hidden">
+          <MonacoWrapper
             language={selectedLanguage.toLowerCase()}
             value={code}
-            onMount={handleEditorMount}
             onChange={(val) => setCode(val ?? "")}
-            options={{ automaticLayout: true, minimap: { enabled: false } }}
+            onMount={handleEditorMount}
+
           />
         </div>
 

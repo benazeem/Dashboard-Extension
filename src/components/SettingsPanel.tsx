@@ -9,7 +9,7 @@ const SettingsPanel = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showTimeDropdown, setShowTimeDropdown] = useState(false);
   const [timeFormat, setTimeFormat] = useState("24");
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -17,8 +17,8 @@ const SettingsPanel = () => {
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setShowTimeDropdown(false);
       }
     };
@@ -26,7 +26,7 @@ const SettingsPanel = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const formatTime = (date, is12Hour = false) => {
+  const formatTime = (date: Date, is12Hour: boolean = false) => {
     return date.toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
@@ -132,7 +132,7 @@ const sidebarItems = [
                     key={color}
                     onClick={() => setSelectedColor(color)}
                     className={`h-6 w-6 rounded-full cursor-pointer transition-transform duration-150 ${
-                      colorClasses[color]
+                      colorClasses[color as keyof typeof colorClasses]
                     } ${selectedColor === color ? "ring-2 ring-black scale-110" : ""}`}
                     title={color}
                   ></div>

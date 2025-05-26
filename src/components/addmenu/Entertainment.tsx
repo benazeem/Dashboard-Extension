@@ -1,4 +1,3 @@
-import React from "react";
 import entertainmentSites from "../addmenu/entertainmentSites.json";
 
 const Entertainment = () => {

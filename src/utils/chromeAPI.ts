@@ -6,7 +6,7 @@ export const getBookmarks = (): Promise<chrome.bookmarks.BookmarkTreeNode[]> => 
 
 export const getHistory = (): Promise<chrome.history.HistoryItem[]> => {
   return new Promise((resolve) => {
-    chrome.history.search({ text: '', maxResults: 100000000 }, (results) => resolve(results));
+    chrome.history.search({ text: '', startTime: 0, maxResults: 100000000 }, (results) => resolve(results));
   });
 };
 

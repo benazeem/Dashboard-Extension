@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Cross } from "lucide-react";
-import { useResponsiveGrid } from "../../hooks/useResponsiveGrid";
+// import { useResponsiveGrid } from "../../hooks/useResponsiveGrid";
 import { type FolderWidgetType } from "../types";
 import DndMonitor from "../dnd-kit/DndMonitor";
 import { DragOverEvent } from "@dnd-kit/core";
@@ -16,10 +16,10 @@ type FolderWidgetProps = {
 };
 
 function FolderWidget({ FolderProps }: FolderWidgetProps) {
-  const { itemIcons, itemIds, name, id } = FolderProps as FolderWidgetType;
+  const { itemIcons, name, id } = FolderProps as FolderWidgetType;
   const { iconList } = FolderProps as IconList;
-  const { WIDGET_HEIGHT } = useResponsiveGrid();
-  const [folderName, setFolderName] = useState(name);
+  // const { WIDGET_HEIGHT } = useResponsiveGrid();
+  // const [folderName, setFolderName] = useState(name);
   const [hoverPreviewItemIcon, setHoverPreviewItemIcon] = useState<string | null>(null);
   const sites = useSelector(getAllSites);
 
@@ -57,7 +57,8 @@ function FolderWidget({ FolderProps }: FolderWidgetProps) {
         handleDragAbort={handleDragCancel}
       />
       <div
-        title={folderName}
+        title={name}
+        id={id}
         className="h-full w-full flex items-center justify-center flex-col overflow-hidden box-border animate-wrapper"
       >
         <div className="icon-container relative flex items-center justify-center rounded-md container40">
@@ -105,7 +106,7 @@ function FolderWidget({ FolderProps }: FolderWidgetProps) {
           </div>
         </div>
         <div className="title mt-2.5 min-h-4 whitespace-nowrap w-full px-5 box-border overflow-hidden text-ellipsis text-center">
-          {folderName}
+          {name}
         </div>
       </div>
       <div className="remove-button absolute cursor-pointer bg-gray-50 rounded-full invisible justify-center items-center select-none transition 0.1s ease w-6 h-6 right-8 top-8">

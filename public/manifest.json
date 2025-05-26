@@ -20,11 +20,18 @@
   "host_permissions": ["https://*/*", "http://*/*"],
   "web_accessible_resources": [
     {
-      "resources": ["icons/*","assets/*.worker.js"],
+      "resources": [
+        "icons/*",
+        "assets/*",
+        "assets/editor/*",
+        "assets/editor/**/*",
+        "assets/editor/min-maps/*",
+        "node_modules/monaco-editor/min/vs/**/*"
+      ],
       "matches": ["<all_urls>"]
     }
   ],
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self';"
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' ; child-src 'self' ; object-src 'self';"
   }
 }

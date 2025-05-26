@@ -8,34 +8,29 @@ import App from "./App.tsx";
 if (import.meta.env.PROD) {
   window.MonacoEnvironment = {
     getWorkerUrl: (_moduleId: string, label: string) => {
-      const workerMapping: Record<string, string> = {
+      const workerPaths: Record<string, string> = {
         'editor': 'editor.worker',
-        'typescript': 'ts.worker',
-        'javascript': 'ts.worker',
-        'css': 'css.worker',
-        'html': 'html.worker',
-        'json': 'json.worker',
-        'c': 'c.worker',
-        'cpp': 'cpp.worker',
-        'python': 'python.worker',
-        'java': 'java.worker',
-        'csharp': 'csharp.worker',
-        'go': 'go.worker',
-        'rust': 'rust.worker',
-        'swift': 'swift.worker',
-        'kotlin': 'kotlin.worker',
-        'objective-c': 'objective-c.worker',
-        'perl': 'perl.worker',
-        'vb': 'vb.worker'
+        'typescript': 'ts',
+        'javascript': 'ts',
+        'css': 'css',
+        'html': 'html',
+        'json': 'json',
+        'c': 'cpp',
+        'cpp': 'cpp',
+        'python': 'python',
+        'java': 'java',
+        'csharp': 'csharp',
+        'go': 'go',
+        'rust': 'rust',
+        'swift': 'swift',
+        'kotlin': 'kotlin',
+        'objective-c': 'objective-c',
+        'perl': 'perl',
+        'vb': 'vb',
       };
-
-      return chrome.runtime.getURL(`/assets/${workerMapping[label] || 'editor'}.worker.js`);
-    },
-  };
-} else {
-  self.MonacoEnvironment = {
-    getWorkerUrl: function () {
-      return '/monaco-editor-worker-loader.js'; // fallback for development
+      
+      const workerName = workerPaths[label] || 'editor.worker';
+      return chrome.runtime.getURL(`assets/editor/${workerName}.js`);
     },
   };
 }

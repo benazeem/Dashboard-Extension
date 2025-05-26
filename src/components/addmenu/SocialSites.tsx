@@ -1,4 +1,3 @@
-import React from "react";
 import socialSites from "../addmenu/socialSites.json";
 
 const SocialSites = () => {
