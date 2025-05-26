@@ -15,8 +15,7 @@
     "history",
     "storage",
     "scripting",
-    "tabs",
-    "storage"
+    "tabs"
   ],
   "host_permissions": ["https://*/*", "http://*/*"],
   "web_accessible_resources": [

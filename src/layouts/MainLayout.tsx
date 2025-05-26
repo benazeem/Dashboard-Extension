@@ -13,6 +13,7 @@ import DndProvider from "../components/dnd-kit/DndProvider";
 import Modal from "../components/ui/Modal";
 import Sidebar from "../components/Sidebar";
 import { useModal } from "../hooks/useModal";
+import ChromeNavbar from "@/components/ChromeNavbarHeader";
 
 
 
@@ -24,6 +25,7 @@ function MainLayout() {
     "https://images.pexels.com/photos/325044/pexels-photo-325044.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
   const { isModalOpen,hideModal, modalChild } = useModal();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isChromHeader, setIsChromHeader] = useState(false);
 
 
   const resetTimer = () => {
@@ -76,12 +78,14 @@ function MainLayout() {
           <Sidebar setShow={setIsSidebarOpen} />
         )}
         <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-between overflow-hidden">
-          <div className="w-full h-[5%] bg-white/50  flex justify-between items-center overflow-visible">
+          {isChromHeader ? <ChromeNavbar setIsChromHeader={setIsChromHeader}/>
+           : <div className="w-full h-[5%] bg-white/50  flex justify-between items-center overflow-visible">
             <Button variant={"ghost"} size={"xl"} onClick={() => setIsSidebarOpen(true)}>
               <MenuIcon size={48} />
             </Button>
             <div className="flex items-center gap-2">
-              <PanelTopOpen />
+              <Button variant={"ghost"} size={"xl"} onClick={() => setIsChromHeader(true)}>
+              <PanelTopOpen /></Button>
               <Avatar>
                 <AvatarImage
                   src="https://github.com/shadcn.png"
@@ -90,7 +94,7 @@ function MainLayout() {
                 {/* <AvatarFallback>CN</AvatarFallback> */}
               </Avatar>
             </div>
-          </div>
+          </div>}
           <div className=" w-full h-[75%] bg-transparent overflow-visible flex items-center justify-center">
             <SimpleSlider />
           </div>

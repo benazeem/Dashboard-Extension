@@ -1,0 +1,1 @@
+importScripts('/monaco-editor/vs/editor/editor.worker.js');
