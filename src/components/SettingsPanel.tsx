@@ -210,7 +210,7 @@ const SettingsPanel = () => {
                   <img
                     src={wallpaper.url}
                     alt=""
-                    className="w-full h-[100px] object-cover"
+                    className="w-[200px] h-[80px] object-cover"
                   />
                 </div>
               ))}
