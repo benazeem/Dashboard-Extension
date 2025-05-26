@@ -4,18 +4,18 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import react from '@vitejs/plugin-react';
-import monacoEditorPlugin from 'vite-plugin-monaco-editor'; // ✅ merged
+// import { monacoEditorPlugin } from 'vite-plugin-monaco-editor'; // ✅ fix: use named import
 
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    monacoEditorPlugin(), // ✅ added monaco plugin
+    // monacoEditorPlugin(), // ✅ now it will work
     viteStaticCopy({
       targets: [
-         {
+        {
           src: 'node_modules/monaco-editor/min/vs/**/*',
-          dest: 'assets', // Output directory for Monaco
+          dest: 'assets',
         },
       ],
     }),
