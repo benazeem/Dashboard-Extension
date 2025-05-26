@@ -19,7 +19,7 @@ function App() {
         return <Whiteboard />;
       case "color-picker":
         return <ColorPicker />;
-        case "code-editor":
+      case "code-editor":
         return <CodeEditor />;
       default:
         return <MainLayout />;

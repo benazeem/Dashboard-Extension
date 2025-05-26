@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import {AnimatePresence, motion} from "motion/react";
 import Menu from "../addmenu/Menu";
+import SettingsPanel from "../SettingsPanel";
 
 interface ModalProps {
   child:string|null;
@@ -15,6 +16,8 @@ const Modal: React.FC<ModalProps> = ({ child, isOpen, onClose }) => {
         switch (child) {
             case 'menu':
                 return <Menu />;
+            case 'settings':
+              return <SettingsPanel/>
                 default:
                     return null;
         }

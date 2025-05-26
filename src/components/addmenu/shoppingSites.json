@@ -1,0 +1,97 @@
+[
+  {
+    "name": "Amazon",
+    "icon": "/shoppingicons/amazon.png",
+    "link": "https://www.amazon.com/"
+  },
+  {
+    "name": "eBay",
+    "icon": "/shoppingicons/ebay.png",
+    "link": "https://www.ebay.com/"
+  },
+  {
+    "name": "Walmart",
+    "icon": "/shoppingicons/walmart.png",
+    "link": "https://www.walmart.com/"
+  },
+  {
+    "name": "Etsy",
+    "icon": "/shoppingicons/etsy.png",
+    "link": "https://www.etsy.com/"
+  },
+  {
+    "name": "AliExpress",
+    "icon": "/shoppingicons/aliexpress.png",
+    "link": "https://www.aliexpress.com/"
+  },
+  {
+    "name": "Best Buy",
+    "icon": "/shoppingicons/bestbuy.png",
+    "link": "https://www.bestbuy.com/"
+  },
+  {
+    "name": "Target",
+    "icon": "/shoppingicons/target.png",
+    "link": "https://www.target.com/"
+  },
+  {
+    "name": "Flipkart",
+    "icon": "/shoppingicons/flipkart.png",
+    "link": "https://www.flipkart.com/"
+  },
+  {
+    "name": "Macy's",
+    "icon": "/shoppingicons/macys.png",
+    "link": "https://www.macys.com/"
+  },
+  {
+    "name": "Zara",
+    "icon": "/shoppingicons/zara.png",
+    "link": "https://www.zara.com/"
+  },
+  {
+    "name": "ASOS",
+    "icon": "/shoppingicons/asos.png",
+    "link": "https://www.asos.com/"
+  },
+  {
+    "name": "Wish",
+    "icon": "/shoppingicons/wish.png",
+    "link": "https://www.wish.com/"
+  },
+  {
+    "name": "Nordstrom",
+    "icon": "/shoppingicons/nordstrom.png",
+    "link": "https://www.nordstrom.com/"
+  },
+  {
+    "name": "Costco",
+    "icon": "/shoppingicons/costco.png",
+    "link": "https://www.costco.com/"
+  },
+  {
+    "name": "JCPenney",
+    "icon": "/shoppingicons/jcpenney.png",
+    "link": "https://www.jcpenney.com/"
+  },
+  {
+    "name": "Shopify",
+    "icon": "/shoppingicons/shopify.png",
+    "link": "https://www.shopify.com/"
+  },
+  {
+    "name": "Overstock",
+    "icon": "/shoppingicons/overstock.png",
+    "link": "https://www.overstock.com/"
+  },
+  {
+    "name": "Sears",
+    "icon": "/shoppingicons/sears.png",
+    "link": "https://www.sears.com/"
+  },
+  {
+    "name": "Lazada",
+    "icon": "/shoppingicons/lazada.png",
+    "link": "https://www.lazada.com/"
+  }
+]

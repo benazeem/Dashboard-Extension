@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Facebook",
+    "icon": "/socialicons/facebook.png",
+    "link": "https://www.facebook.com/"
+  },
+  {
+    "name": "Instagram",
+    "icon": "/socialicons/instagram.png",
+    "link": "https://www.instagram.com/"
+  },
+  {
+    "name": "Twitter",
+    "icon": "/socialicons/twitter.png",
+    "link": "https://www.twitter.com/"
+  },
+  {
+    "name": "LinkedIn",
+    "icon": "/socialicons/linkedin.png",
+    "link": "https://www.linkedin.com/"
+  },
+  {
+    "name": "Snapchat",
+    "icon": "/socialicons/snapchat.png",
+    "link": "https://www.snapchat.com/"
+  },
+  {
+    "name": "TikTok",
+    "icon": "/socialicons/tiktok.png",
+    "link": "https://www.tiktok.com/"
+  },
+  {
+    "name": "Reddit",
+    "icon": "/socialicons/reddit.png",
+    "link": "https://www.reddit.com/"
+  },
+  {
+    "name": "Pinterest",
+    "icon": "/socialicons/pinterest.png",
+    "link": "https://www.pinterest.com/"
+  },
+  {
+    "name": "Tumblr",
+    "icon": "/socialicons/tumblr.png",
+    "link": "https://www.tumblr.com/"
+  },
+  {
+    "name": "Telegram",
+    "icon": "/socialicons/telegram.png",
+    "link": "https://www.telegram.org/"
+  },
+  {
+    "name": "WhatsApp",
+    "icon": "/socialicons/whatsapp.png",
+    "link": "https://www.whatsapp.com/"
+  },
+  {
+    "name": "Messenger",
+    "icon": "/socialicons/messenger.png",
+    "link": "https://www.messenger.com/"
+  },
+  {
+    "name": "WeChat",
+    "icon": "/socialicons/wechat.png",
+    "link": "https://www.wechat.com/"
+  },
+  {
+    "name": "Viber",
+    "icon": "/socialicons/viber.png",
+    "link": "https://www.viber.com/"
+  },
+  {
+    "name": "Line",
+    "icon": "/socialicons/line.png",
+    "link": "https://line.me/"
+  },
+  {
+    "name": "Quora",
+    "icon": "/socialicons/quora.png",
+    "link": "https://www.quora.com/"
+  },
+  {
+    "name": "Discord",
+    "icon": "/socialicons/discord.png",
+    "link": "https://www.discord.com/"
+  },
+  {
+    "name": "Clubhouse",
+    "icon": "/socialicons/clubhouse.png",
+    "link": "https://www.clubhouse.com/"
+  },
+  {
+    "name": "BeReal",
+    "icon": "/socialicons/bereal.png",
+    "link": "https://www.bereal.com/"
+  },
+  {
+    "name": "Threads",
+    "icon": "/socialicons/threads.png",
+    "link": "https://www.threads.net/"
+  }
+]

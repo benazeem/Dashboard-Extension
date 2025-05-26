@@ -142,7 +142,7 @@ function AddSite() {
           type="text"
           ref={nameInputRef}
           placeholder={nameError ? nameError : "Name"}
-          className="w-3/4 h-10 bg-white outline-none text-gray-900 px-2 rounded-lg"
+          className="w-3/4 h-10 bg-white outline-none text-gray-900 px-2 rounded-lg border border-gray-700"
           onChange={(e) => {setName(e.target.value);
             if (e.target.value.trim()) {
               setNameError(""); 
@@ -153,7 +153,7 @@ function AddSite() {
           type="text"
           ref={urlRef}
           placeholder={urlError ? urlError : "URL"}
-          className="w-3/4 h-10 bg-white outline-none text-gray-900 px-2 rounded-lg"
+          className="w-3/4 h-10 bg-white outline-none text-gray-900 px-2 rounded-lg border border-gray-700"
           onChange={(e) => {
             setUrl(e.target.value);
             if (e.target.value.trim()) {

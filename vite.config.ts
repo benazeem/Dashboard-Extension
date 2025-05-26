@@ -4,25 +4,26 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import react from '@vitejs/plugin-react';
-
+import monacoEditorPlugin from 'vite-plugin-monaco-editor'; // ✅ merged
 
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    monacoEditorPlugin(), // ✅ added monaco plugin
     viteStaticCopy({
       targets: [
          {
           src: 'node_modules/monaco-editor/min/vs/**/*',
-          dest: 'assets', // Changed to assets
+          dest: 'assets', // Output directory for Monaco
         },
       ],
     }),
   ],
   base: './',
   optimizeDeps: {
-  include: ['monaco-editor'],
-},
+    include: ['monaco-editor'],
+  },
   build: {
     rollupOptions: {
       input: {
@@ -36,7 +37,7 @@ export default defineConfig({
         format: "es",
         inlineDynamicImports: false,
         manualChunks: {
-          monaco: ['monaco-editor']
+          monaco: ['monaco-editor'],
         },
       },
     },

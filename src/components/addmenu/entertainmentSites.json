@@ -1,0 +1,102 @@
+[
+  {
+    "name": "YouTube",
+    "icon": "/entertainmenticons/youtube.png",
+    "link": "https://www.youtube.com/"
+  },
+  {
+    "name": "Netflix",
+    "icon": "/entertainmenticons/netflix.png",
+    "link": "https://www.netflix.com/"
+  },
+  {
+    "name": "Prime",
+    "icon": "/entertainmenticons/primevideo.png",
+    "link": "https://www.primevideo.com/"
+  },
+  {
+    "name": "Disney+",
+    "icon": "/entertainmenticons/disneyplus.png",
+    "link": "https://www.disneyplus.com/"
+  },
+  {
+    "name": "Hulu",
+    "icon": "/entertainmenticons/hulu.png",
+    "link": "https://www.hulu.com/"
+  },
+  {
+    "name": "HBO Max",
+    "icon": "/entertainmenticons/hbomax.png",
+    "link": "https://www.max.com/"
+  },
+  {
+    "name": "Apple TV+",
+    "icon": "/entertainmenticons/appletv.png",
+    "link": "https://tv.apple.com/"
+  },
+  {
+    "name": "Spotify",
+    "icon": "/entertainmenticons/spotify.png",
+    "link": "https://www.spotify.com/"
+  },
+  {
+    "name": "Gaana",
+    "icon": "/entertainmenticons/gaana.png",
+    "link": "https://www.gaana.com/"
+  },
+  {
+    "name": "JioCinema",
+    "icon": "/entertainmenticons/jiocinema.png",
+    "link": "https://www.jiocinema.com/"
+  },
+  {
+    "name": "MX Player",
+    "icon": "/entertainmenticons/mxplayer.png",
+    "link": "https://www.mxplayer.in/"
+  },
+  {
+    "name": "Zee5",
+    "icon": "/entertainmenticons/zee5.png",
+    "link": "https://www.zee5.com/"
+  },
+  {
+    "name": "Sony LIV",
+    "icon": "/entertainmenticons/sonyliv.png",
+    "link": "https://www.sonyliv.com/"
+  },
+  {
+    "name": "Hotstar",
+    "icon": "/entertainmenticons/hotstar.png",
+    "link": "https://www.hotstar.com/"
+  },
+  {
+    "name": "Tubi",
+    "icon": "/entertainmenticons/tubi.png",
+    "link": "https://www.tubitv.com/"
+  },
+  {
+    "name": "Peacock",
+    "icon": "/entertainmenticons/peacock.png",
+    "link": "https://www.peacocktv.com/"
+  },
+  {
+    "name": "Crunchyroll",
+    "icon": "/entertainmenticons/crunchyroll.png",
+    "link": "https://www.crunchyroll.com/"
+  },
+  {
+    "name": "SoundCloud",
+    "icon": "/entertainmenticons/soundcloud.png",
+    "link": "https://www.soundcloud.com/"
+  },
+  {
+    "name": "Twitch",
+    "icon": "/entertainmenticons/twitch.png",
+    "link": "https://www.twitch.tv/"
+  },
+  {
+    "name": "Vimeo",
+    "icon": "/entertainmenticons/vimeo.png",
+    "link": "https://www.vimeo.com/"
+  }
+]
