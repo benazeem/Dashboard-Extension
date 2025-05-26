@@ -7,44 +7,34 @@ import {
   Palette,
   Globe,
   TvMinimal,
-  Badge,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const SettingsPanel = () => {
-  // Original state
   const [activeSection, setActiveSection] = useState("General");
   const [selectedColor, setSelectedColor] = useState("black");
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showTimeDropdown, setShowTimeDropdown] = useState(false);
   const [timeFormat, setTimeFormat] = useState("24");
-<<<<<<< HEAD
-  const dropdownRef = useRef<HTMLDivElement>(null);
-=======
   const [openWebsiteOption, setOpenWebsiteOption] = useState("current");
-  const dropdownRef = useRef(null);
->>>>>>> 894b99f05aec13907bfe4332ef419ecc10d2dceb
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Wallpaper data - pointing to local files in public/wallpapers folder
-  const wallpapers = Array.from({ length: 9 }, (_, i) => ({
-    id: i + 1,
-    url: `/wallpapers/wallpaper${i + 1}.jpg`, // Path to your local wallpapers
-  }));
-  const [selectedWallpaper, setSelectedWallpaper] = useState(null);
-
-  // Screen Saver state (new additions)
+  const [selectedWallpaper, setSelectedWallpaper] = useState<number | null>(null);
   const [screenSaverEnabled, setScreenSaverEnabled] = useState(false);
   const [selectedDelay, setSelectedDelay] = useState("20 sec");
   const [showDelayDropdown, setShowDelayDropdown] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState(1);
-  
+
   const delays = ["10 sec", "20 sec", "40 sec", "1 min", "2 min", "5 min"];
+  const wallpapers = Array.from({ length: 9 }, (_, i) => ({
+    id: i + 1,
+    url: `/wallpapers/wallpaper${i + 1}.jpg`,
+  }));
   const themes = [
     { id: 1, url: '/themes/theme1.png', name: 'Theme 1' },
     { id: 2, url: '/themes/theme2.png', name: 'Theme 2' },
   ];
 
-  // Original color classes
   const colorClasses = {
     black: "bg-black",
     red: "bg-red-500",
@@ -57,14 +47,12 @@ const SettingsPanel = () => {
     white: "bg-white border border-gray-300",
   };
 
-  // Original sidebar items
   const sidebarItems = [
     { label: "General", icon: Settings },
     { label: "Background", icon: Image },
     { label: "Screen Saver", icon: Monitor },
   ];
 
-  // Original effects
   useEffect(() => {
     const interval = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(interval);
@@ -74,6 +62,7 @@ const SettingsPanel = () => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setShowTimeDropdown(false);
+        setShowDelayDropdown(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -90,8 +79,8 @@ const SettingsPanel = () => {
   };
 
   return (
-    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[650px] h-[420px] bg-white rounded-2xl shadow-xl flex overflow-hidden border z-50">
-      {/* Sidebar - unchanged */}
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[650px] h-[90%] bg-white rounded-2xl shadow-xl flex overflow-hidden border z-50">
+      {/* Sidebar */}
       <div className="w-1/3 border-r p-4 bg-gray-50">
         {sidebarItems.map((item) => (
           <div
@@ -109,15 +98,12 @@ const SettingsPanel = () => {
         ))}
       </div>
 
-      {/* Main Panel */}
-      <div className="w-2/3 p-6 text-sm text-gray-800">
+      {/* Main Content */}
+      <div className="w-2/3 p-6 overflow-y-auto text-sm text-gray-800">
         {activeSection === "General" && (
           <>
-            {/* Time Format - unchanged */}
-            <div
-              className="mb-6 pb-6 border-b border-gray-200 flex justify-between items-center gap-4"
-              ref={dropdownRef}
-            >
+            {/* Time Format */}
+            <div ref={dropdownRef} className="mb-6 pb-6 border-b flex justify-between items-center gap-4">
               <div className="flex items-center gap-2 font-semibold">
                 <Clock className="w-4 h-4" />
                 <p>Time Format</p>
@@ -155,8 +141,8 @@ const SettingsPanel = () => {
               </div>
             </div>
 
-            {/* Font Color - unchanged */}
-            <div className="mb-6 pb-6 border-b border-gray-200 flex justify-between items-center gap-4">
+            {/* Font Color */}
+            <div className="mb-6 pb-6 border-b flex justify-between items-center gap-4">
               <div className="flex items-center gap-2 font-semibold">
                 <Palette />
                 <p>Font Color</p>
@@ -167,25 +153,16 @@ const SettingsPanel = () => {
                     key={color}
                     onClick={() => setSelectedColor(color)}
                     className={`h-6 w-6 rounded-full cursor-pointer transition-transform duration-150 ${
-<<<<<<< HEAD
                       colorClasses[color as keyof typeof colorClasses]
                     } ${selectedColor === color ? "ring-2 ring-black scale-110" : ""}`}
-=======
-                      colorClasses[color]
-                    } ${
-                      selectedColor === color
-                        ? "ring-2 ring-black scale-110"
-                        : ""
-                    }`}
->>>>>>> 894b99f05aec13907bfe4332ef419ecc10d2dceb
                     title={color}
-                  ></div>
+                  />
                 ))}
               </div>
             </div>
 
-            {/* Open Website - unchanged */}
-            <div className="mb-6 pb-6 border-b border-gray-200">
+            {/* Open Website */}
+            <div className="mb-6 pb-6 border-b">
               <div className="flex items-center justify-between font-semibold mb-2">
                 <div className="flex items-center gap-2">
                   <Globe />
@@ -218,8 +195,8 @@ const SettingsPanel = () => {
                 >
                   <img
                     src={wallpaper.url}
-                    alt=""
-                    className="w-[200px] h-[80px] object-cover"
+                    alt={`Wallpaper ${wallpaper.id}`}
+                    className="w-full h-[80px] object-cover"
                   />
                 </div>
               ))}
@@ -228,9 +205,9 @@ const SettingsPanel = () => {
         )}
 
         {activeSection === "Screen Saver" && (
-          <div>
-            {/* New Screen Saver Content */}
-            <div className="mb-6 pb-6 border-b border-gray-200 flex justify-between items-center gap-4">
+          <>
+            {/* Screen Saver Toggle */}
+            <div className="mb-6 pb-6 border-b flex justify-between items-center gap-4">
               <div className="flex items-center gap-2 font-semibold">
                 <TvMinimal className="w-4 h-4" />
                 <p>Turn On</p>
@@ -246,44 +223,42 @@ const SettingsPanel = () => {
               </label>
             </div>
 
-            <div className="mb-6 pb-6 border-b border-gray-200">
+            {/* Font Color */}
+            <div className="mb-6 pb-6 border-b">
               <div className="flex items-center gap-2 font-semibold mb-5">
-                <Palette className="w-4 h-4 " />
+                <Palette className="w-4 h-4" />
                 <p>Font Color</p>
               </div>
-              <div className="flex flex-wrap gap-2 ">
+              <div className="flex flex-wrap gap-2">
                 {Object.keys(colorClasses).map((color) => (
                   <div
                     key={color}
                     onClick={() => setSelectedColor(color)}
-                    className={`h-5 w-5  rounded-full cursor-pointer transition-transform duration-150 ${
-                      colorClasses[color]
-                    } ${
-                      selectedColor === color
-                        ? "ring-2 ring-black scale-110"
-                        : ""
-                    }`}
+                    className={`h-5 w-5 rounded-full cursor-pointer transition-transform duration-150 ${
+                      colorClasses[color as keyof typeof colorClasses]
+                    } ${selectedColor === color ? "ring-2 ring-black scale-110" : ""}`}
                     title={color}
-                  ></div>
+                  />
                 ))}
               </div>
             </div>
 
-            <div className="mb-6 pb-6 flex items-center justify-between border-b border-gray-200">
-              <div className="flex items-center gap-2 font-semibold mb-2">
+            {/* Delay Selection */}
+            <div ref={dropdownRef} className="mb-6 pb-6 border-b flex justify-between items-center gap-4">
+              <div className="flex items-center gap-2 font-semibold">
                 <Clock className="w-4 h-4" />
-                <p>Delay</p>
+                <p>Start After</p>
               </div>
               <div className="relative">
                 <div
-                  className="cursor-pointer bg-gray-100 px-3 py-2 rounded w-full flex items-center justify-between"
+                  className="cursor-pointer bg-gray-100 px-3 py-1 rounded flex items-center justify-between gap-2 min-w-[120px]"
                   onClick={() => setShowDelayDropdown(!showDelayDropdown)}
                 >
                   {selectedDelay}
                   <ChevronDown className="w-4 h-4 text-gray-600" />
                 </div>
                 {showDelayDropdown && (
-                  <div className="absolute mt-1 bg-white shadow-md border rounded w-full z-10">
+                  <div className="absolute right-0 mt-1 bg-white shadow-md border rounded w-40 z-10">
                     {delays.map((delay) => (
                       <div
                         key={delay}
@@ -301,30 +276,31 @@ const SettingsPanel = () => {
               </div>
             </div>
 
-            <div className="mb-6 pb-6 border-b border-gray-200 items-center gap-4">
-              <div className="flex items-center gap-2 font-semibold mb-2">
-              <Badge className="w-4 h-4"/>
-              <p>Theme</p>
+            {/* Theme Selection */}
+            <div>
+              <div className="flex items-center gap-2 font-semibold mb-4">
+                <Palette className="w-4 h-4" />
+                <p>Theme</p>
               </div>
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 {themes.map((theme) => (
                   <div
                     key={theme.id}
-                    onClick={() => setSelectedTheme(theme.id)}
-                    className={`cursor-pointer rounded overflow-hidden ${
+                    className={`cursor-pointer border rounded overflow-hidden w-20 h-16 ${
                       selectedTheme === theme.id ? "ring-2 ring-blue-500" : ""
                     }`}
+                    onClick={() => setSelectedTheme(theme.id)}
                   >
                     <img
                       src={theme.url}
                       alt={theme.name}
-                      className="w-40 h-20 object-cover"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 ))}
               </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </div>
