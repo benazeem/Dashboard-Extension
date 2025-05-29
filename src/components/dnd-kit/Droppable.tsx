@@ -15,7 +15,7 @@ export default function Droppable({
   id,
   children, 
   width,
-  // className = "min-w-10 rounded-lg",
+  className
 }: DroppableProps) {
   const { setNodeRef } = useDroppable({ id });
  const { DROPPABLE_AREA_WIDTH,DROPPABLE_AREA_HEIGHT, DOCK_HEIGHT} = useResponsiveGrid();
@@ -31,7 +31,7 @@ export default function Droppable({
     <div
       ref={setNodeRef}
       style={style}
-      // className={className}
+      className={className}
     >
       {children}
     </div>

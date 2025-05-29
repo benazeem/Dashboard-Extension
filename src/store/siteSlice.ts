@@ -10,7 +10,7 @@ export interface SiteItem {
     x: number; // Optional, for positioning gridColumnStart
     y: number; // Optional, for positioning gridRowStart
     width: 1;
-    height: 1; 
+    height: 1;
     parent: string; // Optional, for parent area (e.g., "dock", "main", "page-1", etc.)
     type: "site";
   }

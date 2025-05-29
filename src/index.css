@@ -222,6 +222,7 @@ button:focus-visible {
 
 .clock {
   width: 150px;
+  background-color: white;
   height: 150px;
   border-radius: 50%;
   position: absolute;

@@ -1,3 +1,5 @@
+import { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import {
   ChevronDown,
   Settings,
@@ -8,31 +10,56 @@ import {
   Globe,
   TvMinimal,
 } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { RootState } from '../store/store';
+import {
+  setTimeFormat,
+  setFontColor,
+  setOpenWebsite,
+  setBackground,
+  setScreenSaverEnabled,
+  setScreenSaverFontColor,
+  setScreenSaverStartAfterTime,
+  setTheme,
+} from '../store/settingSlice';
 
 const SettingsPanel = () => {
   const [activeSection, setActiveSection] = useState("General");
-  const [selectedColor, setSelectedColor] = useState("black");
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showTimeDropdown, setShowTimeDropdown] = useState(false);
-  const [timeFormat, setTimeFormat] = useState("24");
-  const [openWebsiteOption, setOpenWebsiteOption] = useState("current");
+  const [showDelayDropdown, setShowDelayDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const [selectedWallpaper, setSelectedWallpaper] = useState<number | null>(null);
-  const [screenSaverEnabled, setScreenSaverEnabled] = useState(false);
-  const [selectedDelay, setSelectedDelay] = useState("20 sec");
-  const [showDelayDropdown, setShowDelayDropdown] = useState(false);
-  const [selectedTheme, setSelectedTheme] = useState(1);
+  const dispatch = useDispatch();
+  const {
+    timeFormat,
+    fontColor,
+    openWebsite,
+    background,
+    screenSaver,
+    theme,
+  } = useSelector((state: RootState) => state.settings);
 
-  const delays = ["10 sec", "20 sec", "40 sec", "1 min", "2 min", "5 min"];
+  const [selectedWallpaper, setSelectedWallpaper] = useState<string>(background);
+  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark'>(theme);
+
+  const delays = [
+    { label: "10 sec", value: 10 },
+    { label: "20 sec", value: 20 },
+    { label: "40 sec", value: 40 },
+    { label: "1 min", value: 60 },
+    { label: "2 min", value: 120 },
+    { label: "5 min", value: 300 },
+  ];
+
   const wallpapers = Array.from({ length: 9 }, (_, i) => ({
     id: i + 1,
     url: `/wallpapers/wallpaper${i + 1}.jpg`,
+    name: `wallpaper${i + 1}.jpg`
   }));
+
   const themes = [
-    { id: 1, url: '/themes/theme1.png', name: 'Theme 1' },
-    { id: 2, url: '/themes/theme2.png', name: 'Theme 2' },
+    { id: 'light', name: 'Light Theme' },
+    { id: 'dark', name: 'Dark Theme' },
   ];
 
   const colorClasses = {
@@ -78,8 +105,13 @@ const SettingsPanel = () => {
     });
   };
 
+  const getCurrentDelayLabel = () => {
+    const delay = delays.find(d => d.value === screenSaver.startAfterSeconds);
+    return delay ? delay.label : delays[1].label;
+  };
+
   return (
-    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[650px] h-[90%] bg-white rounded-2xl shadow-xl flex overflow-hidden border z-50">
+    <div className="w-[600px] h-[400px] rounded-2xl relative p-2 flex justify-between bg-white overflow-hidden no-scrollbar">
       {/* Sidebar */}
       <div className="w-1/3 border-r p-4 bg-gray-50">
         {sidebarItems.map((item) => (
@@ -99,7 +131,7 @@ const SettingsPanel = () => {
       </div>
 
       {/* Main Content */}
-      <div className="w-2/3 p-6 overflow-y-auto text-sm text-gray-800">
+      <div className="w-2/3 p-6 overflow-y-auto text-sm text-gray-800 overflow-hidden no-scrollbar">
         {activeSection === "General" && (
           <>
             {/* Time Format */}
@@ -113,7 +145,7 @@ const SettingsPanel = () => {
                   className="cursor-pointer bg-gray-100 px-3 py-1 rounded w-fit min-w-[140px] text-center flex items-center justify-between gap-2"
                   onClick={() => setShowTimeDropdown(!showTimeDropdown)}
                 >
-                  {formatTime(currentTime, timeFormat === "12")}
+                  {formatTime(currentTime, timeFormat === "12h")}
                   <ChevronDown className="w-4 h-4 text-gray-600" />
                 </div>
                 {showTimeDropdown && (
@@ -121,7 +153,7 @@ const SettingsPanel = () => {
                     <div
                       className="p-2 hover:bg-indigo-50 cursor-pointer"
                       onClick={() => {
-                        setTimeFormat("24");
+                        dispatch(setTimeFormat("24h"));
                         setShowTimeDropdown(false);
                       }}
                     >
@@ -130,7 +162,7 @@ const SettingsPanel = () => {
                     <div
                       className="p-2 hover:bg-indigo-50 cursor-pointer"
                       onClick={() => {
-                        setTimeFormat("12");
+                        dispatch(setTimeFormat("12h"));
                         setShowTimeDropdown(false);
                       }}
                     >
@@ -151,10 +183,10 @@ const SettingsPanel = () => {
                 {Object.keys(colorClasses).map((color) => (
                   <div
                     key={color}
-                    onClick={() => setSelectedColor(color)}
+                    onClick={() => dispatch(setFontColor(color))}
                     className={`h-6 w-6 rounded-full cursor-pointer transition-transform duration-150 ${
                       colorClasses[color as keyof typeof colorClasses]
-                    } ${selectedColor === color ? "ring-2 ring-black scale-110" : ""}`}
+                    } ${fontColor === color ? "ring-2 ring-black scale-110" : ""}`}
                     title={color}
                   />
                 ))}
@@ -168,13 +200,13 @@ const SettingsPanel = () => {
                   <Globe />
                   <p>Open Website</p>
                 </div>
-                <select 
+                <select
                   className="border rounded p-2"
-                  value={openWebsiteOption}
-                  onChange={(e) => setOpenWebsiteOption(e.target.value)}
+                  value={openWebsite}
+                  onChange={(e) => dispatch(setOpenWebsite(e.target.value as 'new_tab' | 'current_tab'))}
                 >
-                  <option value="current">In the current tab</option>
-                  <option value="new">In a new tab</option>
+                  <option value="current_tab">In the current tab</option>
+                  <option value="new_tab">In a new tab</option>
                 </select>
               </div>
             </div>
@@ -189,9 +221,12 @@ const SettingsPanel = () => {
                 <div
                   key={wallpaper.id}
                   className={`cursor-pointer overflow-hidden rounded ${
-                    selectedWallpaper === wallpaper.id ? "ring-2 ring-blue-500" : ""
+                    selectedWallpaper === wallpaper.name ? "ring-2 ring-blue-500" : ""
                   }`}
-                  onClick={() => setSelectedWallpaper(wallpaper.id)}
+                  onClick={() => {
+                    setSelectedWallpaper(wallpaper.name);
+                    dispatch(setBackground(wallpaper.name));
+                  }}
                 >
                   <img
                     src={wallpaper.url}
@@ -213,11 +248,11 @@ const SettingsPanel = () => {
                 <p>Turn On</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
-                <input 
-                  type="checkbox" 
-                  className="sr-only peer" 
-                  checked={screenSaverEnabled}
-                  onChange={() => setScreenSaverEnabled(!screenSaverEnabled)}
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  checked={screenSaver.enabled}
+                  onChange={() => dispatch(setScreenSaverEnabled(!screenSaver.enabled))}
                 />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
               </label>
@@ -233,10 +268,10 @@ const SettingsPanel = () => {
                 {Object.keys(colorClasses).map((color) => (
                   <div
                     key={color}
-                    onClick={() => setSelectedColor(color)}
+                    onClick={() => dispatch(setScreenSaverFontColor(color))}
                     className={`h-5 w-5 rounded-full cursor-pointer transition-transform duration-150 ${
                       colorClasses[color as keyof typeof colorClasses]
-                    } ${selectedColor === color ? "ring-2 ring-black scale-110" : ""}`}
+                    } ${screenSaver.fontColor === color ? "ring-2 ring-black scale-110" : ""}`}
                     title={color}
                   />
                 ))}
@@ -254,21 +289,21 @@ const SettingsPanel = () => {
                   className="cursor-pointer bg-gray-100 px-3 py-1 rounded flex items-center justify-between gap-2 min-w-[120px]"
                   onClick={() => setShowDelayDropdown(!showDelayDropdown)}
                 >
-                  {selectedDelay}
+                  {getCurrentDelayLabel()}
                   <ChevronDown className="w-4 h-4 text-gray-600" />
                 </div>
                 {showDelayDropdown && (
                   <div className="absolute right-0 mt-1 bg-white shadow-md border rounded w-40 z-10">
                     {delays.map((delay) => (
                       <div
-                        key={delay}
+                        key={delay.value}
                         className="p-2 hover:bg-indigo-50 cursor-pointer"
                         onClick={() => {
-                          setSelectedDelay(delay);
+                          dispatch(setScreenSaverStartAfterTime(delay.value));
                           setShowDelayDropdown(false);
                         }}
                       >
-                        {delay}
+                        {delay.label}
                       </div>
                     ))}
                   </div>
@@ -286,16 +321,15 @@ const SettingsPanel = () => {
                 {themes.map((theme) => (
                   <div
                     key={theme.id}
-                    className={`cursor-pointer border rounded overflow-hidden w-20 h-16 ${
+                    className={`cursor-pointer border rounded overflow-hidden w-20 h-16 flex items-center justify-center ${
                       selectedTheme === theme.id ? "ring-2 ring-blue-500" : ""
                     }`}
-                    onClick={() => setSelectedTheme(theme.id)}
+                    onClick={() => {
+                      setSelectedTheme(theme.id as 'light' | 'dark');
+                      dispatch(setTheme(theme.id as 'light' | 'dark'));
+                    }}
                   >
-                    <img
-                      src={theme.url}
-                      alt={theme.name}
-                      className="w-full h-full object-cover"
-                    />
+                    <span>{theme.name}</span>
                   </div>
                 ))}
               </div>

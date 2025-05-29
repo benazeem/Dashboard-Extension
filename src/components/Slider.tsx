@@ -17,13 +17,14 @@ const SimpleSlider = () => {
       (state: RootState) => state.pages
     );
     
+    console.log("SimpleSlider items:", items);
     //  const widgetItems = useSelector((state: RootState) => state.widgetItems);
     const memoizedItems = useMemo(() => items, [items]);
 
   
     const homeItems = memoizedItems.filter((item) => item.parent === "home");
     const pagesItems: any[] = memoizedItems.filter((item) =>
-      item.parent.startsWith("page-")
+      typeof item.parent === 'string' && item.parent.startsWith("page-")
     );
 
     useEffect(() => {

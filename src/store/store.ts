@@ -4,6 +4,9 @@ import siteReducer from './siteSlice';
 import pageReducer from './pageSlice';
 import folderReducer from './folderSlice';
 import layoutReducer from './mainLayoutSlice';
+import settingReducer from './settingSlice';
+import widgetReducer from './widgetSlice';
+
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +15,8 @@ export const store = configureStore({
     pages: pageReducer,
     folders: folderReducer,
     layout: layoutReducer,
+    settings: settingReducer,
+        widgets: widgetReducer,
   },
 })
 

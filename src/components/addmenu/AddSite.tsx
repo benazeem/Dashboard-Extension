@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {Star, Globe, Type, Upload} from "lucide-react";
 
 import { useModal } from '../../hooks/useModal';
@@ -7,6 +7,9 @@ import { addSite } from "../../store/siteSlice";
 import {Button} from "../ui/button";
 import {isValidUrl} from "../../utils/inputValidator";
 import { creatingTextLogo, base64, fetchWebsiteColor, fetchFavicon } from "@/utils/addSiteUtils";
+import getAvailableGridPosition from "@/utils/getAvailableGridPosition";
+import { getAllItems } from "@/store/selectors";
+
 
 function AddSite() {
   const { hideModal } = useModal();
@@ -22,6 +25,14 @@ function AddSite() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const urlRef = useRef<HTMLInputElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
+
+  // Use useSelector to get allItems from the Redux state
+  const allItems = useSelector(getAllItems);
+
+const pos = getAvailableGridPosition(
+  allItems,
+  { width: 1, height: 1 },
+);
 
 
   useEffect(() => {
@@ -124,11 +135,11 @@ function AddSite() {
           url: url,
           icon: logo,
           type: "site",
-          x: Math.floor(Math.random() * 6),
-          y: Math.floor(Math.random() * 3),
+          x: pos.x,
+          y: pos.y,
           width: 1,
           height: 1,
-          parent: "home",
+          parent: pos.parent,
           id: shortcutId,
         })
       );

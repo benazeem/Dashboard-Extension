@@ -1,7 +1,7 @@
 import Draggable from "@/components/dnd-kit/DraggableItem";
 import Droppable  from "@/components/dnd-kit/Droppable"
 // import { BorderLeft, BorderRight } from "../components/BorderRightandLeft";
-import { SiteItem, FolderType,PageType } from "../types"; // Ensure these types are correctly imported
+import { SiteItem, FolderType,PageType } from "../../types"; // Ensure these types are correctly imported
 
 interface pagePropsType {
   page: PageType;

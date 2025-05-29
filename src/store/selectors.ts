@@ -4,7 +4,8 @@ import { RootState } from './store';
 export const getAllItems = (state: RootState) => {
   const sites = state.sites.items;
   const folders = state.folders.folders;
-  const allItems = [...Object.values(sites), ...folders];
+  const widgets = state.widgets.items;
+  const allItems = [...Object.values(sites), ...folders, ...widgets];
   return allItems;
 }
 
@@ -14,8 +15,6 @@ export const getAllSites = (state: RootState) => state.sites.items;
 
 export const selectSiteById = (siteId: string) => (state: RootState) =>
   state.sites.items[siteId as keyof typeof state.sites.items];
-
-
 
 
 

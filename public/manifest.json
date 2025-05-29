@@ -11,11 +11,15 @@
     "type": "module"
   },
   "permissions": [
-    "bookmarks",
-    "history",
-    "storage",
-    "scripting",
-    "tabs"
+     "tabs",
+  "sessions",
+  "management",
+  "alarms",
+  "downloads",
+  "history",
+  "bookmarks",
+  "storage",
+    "windows"
   ],
   "host_permissions": ["https://*/*", "http://*/*"],
   "web_accessible_resources": [

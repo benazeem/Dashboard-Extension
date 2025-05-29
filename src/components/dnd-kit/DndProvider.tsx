@@ -18,7 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addPage, setCurrentPage,setNavigationDirection } from "@/store/pageSlice";  
 import {updateSite, setMergePreview} from "@/store/siteSlice";
 import { RootState } from "@/store/store";
-import { useAutoRemovePageIfEmpty } from "../../utils/useAutoRemovePageIfEmpty";
+import { useAutoRemovePageIfEmpty } from "../../hooks/useAutoRemovePageIfEmpty";
 import SiteWidget from "../widgets/SiteWidget";
 import { useResponsiveGrid } from '../../hooks/useResponsiveGrid';
 import {addFolder, addItemToFolder, setHoverPreview } from "@/store/folderSlice";
@@ -26,6 +26,8 @@ import { getAllFolders } from "@/store/selectors";
 import FolderWidget from "../widgets/FolderWidget";
 
 const DndProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+const COLUMNS = 6.5;
+const ROWS = 3.5;
 
   const {DROPPABLE_AREA_WIDTH, WIDGET_HEIGHT } = useResponsiveGrid();
   const dispatch = useDispatch();
@@ -79,7 +81,7 @@ const DndProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       dispatch(setCurrentPage(1));
     }
 
-    // Set page to Next page if available
+    // Set page to Next page if available 
     if (dragParentIndex < pages.length) {
       const nextPage = dragParentIndex + 2;
       if (nextPage) {
@@ -190,6 +192,8 @@ const DndProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           itemIcons: [overItem.icon,activeItem.icon],
           x: overItem.x,
           y: overItem.y,
+          height: 1,
+          width: 1,
           parent: overItem.parent,
           type: "folder",
         })); // Add the new folder to the store
@@ -206,6 +210,31 @@ const DndProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         dispatch(setHoverPreview({ folderId: overItem.id, itemIcon: null })); // Reset the hover preview state
         }}
   }
+
+  const dropX = active.data.current?.x + event.delta?.x;
+  const dropY = active.data.current?.y + event.delta?.y;
+
+  // Snap to grid
+  let snappedX = Math.round(dropX / WIDGET_HEIGHT);
+  let snappedY = Math.round(dropY / WIDGET_HEIGHT);
+
+  snappedX = Math.max(0, Math.min(Math.floor(COLUMNS) - 1, snappedX));
+  snappedY = Math.max(0, Math.min(Math.floor(ROWS) - 1, snappedY)); // floor to prevent half row overstep
+
+
+  const item = nonWidgetItems.find((item) => item.id === activeId);
+  if (!item) return;
+
+  const updatedItem = {
+    ...item,
+    x: snappedX,
+    y: snappedY,
+  };
+
+  if(updatedItem.type === "site") {
+  dispatch(updateSite(updatedItem));}
+   
+
   };
 
   const handleDragCancel = () => {

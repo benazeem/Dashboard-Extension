@@ -1,57 +1,78 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { addWidget } from "../../store/widgetSlice";
+import { hideModal } from "../../store/modalSlice";
+import { v4 as uuidv4 } from "uuid";
+
 import search from "./icons/search.png";
 import notes from "./icons/notes.png";
 import clock from "./icons/clock.png";
 import image from "./icons/1.png";
 import ai from "./icons/ai.png";
 import checklist from "./icons/checklist.png";
-import AnalogClock from "../ui/AnalogClock";
-import AnalogClock2 from "../ui/AnalogClock2";
+import AnalogClock from "../ui/AnalogClock"; 
+import { RootState } from "@/store/store";
+import getAvailableGridPosition from "@/utils/getAvailableGridPosition";
+import { getAllItems } from "@/store/selectors";
 
 const widgetOptions = [
-  { name: "Search", imgSrc: search },
-  { name: "Notes", imgSrc: notes },
-  { name: "Clock", imgSrc: clock },
-  { name: "Image", imgSrc: image },
-  { name: "ChatAI", imgSrc: ai },
-  { name: "To Do", imgSrc: checklist },
+  { name: "Search", type: "search", imgSrc: search },
+  { name: "Notes", type: "notes", imgSrc: notes },
+  { name: "Clock", type: "clock", imgSrc: clock },
+  { name: "Image", type: "image", imgSrc: image },
+  { name: "ChatAI", type: "chatAI", imgSrc: ai },
+  { name: "To Do", type: "todo", imgSrc: checklist },
 ];
 
 const clockOptions = [
-  {
-    name: "Analog Clock 1",
-    imgSrc: null,
-    component: <AnalogClock />,
-  },
-  {
-    name: "Analog Clock 2",
-    imgSrc: null,
-    component: <AnalogClock2 />,
-  },
+  { name: "Analog Clock Light", component: <AnalogClock theme="light" /> },
+  { name: "Analog Clock Dark", component: <AnalogClock theme="dark" /> },
 ];
 
 const Widgets = () => {
+  const dispatch = useDispatch();
+  const widgets = useSelector((state: RootState) => state.widgets.items);
+
   const [showClockSlider, setShowClockSlider] = useState(false);
   const [clockIndex, setClockIndex] = useState(0);
-  const [addedWidgets, setAddedWidgets] = useState<{ name: string; component: React.JSX.Element }[]>([]);
 
-  const handleWidgetClick = (widgetName:string) => {
-    if (widgetName === "Clock") {
-      setShowClockSlider(true);
-    }
+  const allItems = useSelector(getAllItems);
+
+const pos = getAvailableGridPosition(
+  allItems,
+  { width: 1, height: 1 },
+);
+
+
+
+  const handleWidgetClick = (widgetName: string) => {
+    if (widgetName === "Clock") setShowClockSlider(true);
+    // You can handle other types here similarly
   };
 
   const handleAddClockWidget = () => {
-    const selectedClock = clockOptions[clockIndex];
-    setAddedWidgets([
-      ...addedWidgets,
-      { name: selectedClock.name, component: selectedClock.component },
-    ]);
+    const selected = clockOptions[clockIndex];
+    dispatch(
+      addWidget({
+        id: uuidv4(),
+        name: selected.name,
+        type: "clock",
+        component: selected.component,
+        width:1,
+        height: 1,
+        x:pos.x,
+        y: pos.y,
+        parent: pos.parent,
+      })
+    );
     setShowClockSlider(false);
+    dispatch(hideModal())
   };
 
+  console.log(widgets)
+
   return (
-    <div className="w-full h-full bg-white rounded-2xl p-4 shadow-inner overflow-hidden flex flex-col items-center justify-center">
+    <div className="w-full h-full bg-white rounded-2xl p-4 shadow-inner flex flex-col items-center justify-center">
       {!showClockSlider ? (
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6">
           {widgetOptions.map((widget, index) => (
@@ -71,26 +92,13 @@ const Widgets = () => {
               </span>
             </div>
           ))}
-          {addedWidgets.map((widget, index) => (
-            <div
-              key={`added-${index}`}
-              className="flex flex-col items-center justify-center"
-              style={{ width: "90px" }}
-            >
-              <div className="w-16 h-16 flex items-center justify-center overflow-hidden">
-                {widget.component}
-              </div>
-              <span className="text-sm mt-2 font-medium text-gray-900 text-center">
-                {widget.name}
-              </span>
-            </div>
-          ))}
+        
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-full">
           <div className="flex items-center justify-center gap-6 ">
             <button
-              className="text-2xl px-4 flex-shrink-0"
+              className="text-2xl px-4"
               onClick={() =>
                 setClockIndex((prev) =>
                   prev === 0 ? clockOptions.length - 1 : prev - 1
@@ -100,15 +108,9 @@ const Widgets = () => {
             >
               ◀
             </button>
-
-            <div className="w-28 h-28  flex items-center justify-center overflow-hidden rounded-lg bg-gray-100 mx-7 ">
-                
               {clockOptions[clockIndex].component}
-            
-            </div>
-
             <button
-              className="text-2xl px-4 flex-shrink-0"
+              className="text-2xl px-4"
               onClick={() =>
                 setClockIndex((prev) =>
                   prev === clockOptions.length - 1 ? 0 : prev + 1

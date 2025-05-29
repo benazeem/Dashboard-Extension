@@ -1,7 +1,14 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import { useResponsiveGrid } from "@/hooks/useResponsiveGrid";
 
-const AnalogClock = () => {
+type AnalogClockProps = {
+  theme?: "light" | "dark";
+};
+
+const AnalogClock = ({ theme = "light" }: AnalogClockProps) => {
   const [time, setTime] = useState(new Date());
+  const { WIDGET_HEIGHT } = useResponsiveGrid();
+  const clockSize = WIDGET_HEIGHT - 10;
 
   useEffect(() => {
     const timerId = setInterval(() => setTime(new Date()), 1000);
@@ -12,24 +19,69 @@ const AnalogClock = () => {
   const minDeg = time.getMinutes() * 6;
   const secDeg = time.getSeconds() * 6;
 
-  return (
-    <div className="clock">
-      <div className="hour_hand" style={{ transform: `rotateZ(${hourDeg}deg)` }} />
-      <div className="min_hand" style={{ transform: `rotateZ(${minDeg}deg)` }} />
-      <div className="sec_hand" style={{ transform: `rotateZ(${secDeg}deg)` }} />
+  const numbers = [
+    { label: "12", className: "top-2 left-1/2 -translate-x-1/2" },
+    { label: "3", className: "top-1/2 right-2 -translate-y-1/2" },
+    { label: "6", className: "bottom-2 left-1/2 -translate-x-1/2" },
+    { label: "9", className: "top-1/2 left-2 -translate-y-1/2" },
+  ];
 
-      <span className="twelve">12</span>
-      <span className="one">1</span>
-      <span className="two">2</span>
-      <span className="three">3</span>
-      <span className="four">4</span>
-      <span className="five">5</span>
-      <span className="six">6</span>
-      <span className="seven">7</span>
-      <span className="eight">8</span>
-      <span className="nine">9</span>
-      <span className="ten">10</span>
-      <span className="eleven">11</span>
+  const isDark = theme === "dark";
+
+  return (
+    <div
+      className={`relative mx-auto flex items-center justify-center rounded-full shadow-md ${
+        isDark ? "bg-gray-900 text-white" : "bg-white text-gray-700"
+      }`}
+      style={{ width: clockSize, height: clockSize }}
+    >
+      {/* Hands */}
+      <div
+        className={`absolute origin-bottom ${isDark ? "bg-white" : "bg-gray-800"}`}
+        style={{
+          width: 4,
+          height: clockSize * 0.22,
+          top: clockSize * 0.28,
+          left: "50%",
+          transform: `translateX(-50%) rotateZ(${hourDeg}deg)`,
+        }}
+      />
+      <div
+        className={`absolute origin-bottom ${isDark ? "bg-gray-300" : "bg-gray-600"}`}
+        style={{
+          width: 2,
+          height: clockSize * 0.32,
+          top: clockSize * 0.18,
+          left: "50%",
+          transform: `translateX(-50%) rotateZ(${minDeg}deg)`,
+        }}
+      />
+      <div
+        className="absolute w-[1.5px] bg-red-500 origin-bottom"
+        style={{
+          height: clockSize * 0.42,
+          top: clockSize * 0.08,
+          left: "50%",
+          transform: `translateX(-50%) rotateZ(${secDeg}deg)`,
+        }}
+      />
+
+      {/* Center circle */}
+      <div
+        className={`absolute w-3 h-3 rounded-full border-2 z-10 ${
+          isDark ? "bg-white border-gray-800" : "bg-gray-400 border-white"
+        }`}
+      />
+
+      {/* Clock numbers */}
+      {numbers.map(({ label, className }) => (
+        <span
+          key={label}
+          className={`absolute text-xs font-semibold select-none ${className}`}
+        >
+          {label}
+        </span>
+      ))}
     </div>
   );
 };

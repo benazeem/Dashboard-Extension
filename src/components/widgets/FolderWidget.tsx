@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Cross } from "lucide-react";
 // import { useResponsiveGrid } from "../../hooks/useResponsiveGrid";
-import { type FolderWidgetType } from "../types";
+import { type FolderWidgetType } from "../../types";
 import DndMonitor from "../dnd-kit/DndMonitor";
 import { DragOverEvent } from "@dnd-kit/core";
 import { useSelector } from "react-redux";
 import { getAllSites } from "@/store/selectors";
+import { usePointerClickOpen } from "@/hooks/usePointerClickOpen";
 
 type IconList = {
   iconList?: string[];
@@ -19,9 +20,9 @@ function FolderWidget({ FolderProps }: FolderWidgetProps) {
   const { itemIcons, name, id } = FolderProps as FolderWidgetType;
   const { iconList } = FolderProps as IconList;
   // const { WIDGET_HEIGHT } = useResponsiveGrid();
-  // const [folderName, setFolderName] = useState(name);
   const [hoverPreviewItemIcon, setHoverPreviewItemIcon] = useState<string | null>(null);
   const sites = useSelector(getAllSites);
+   const { handlePointerDown} = usePointerClickOpen({folderId: id});
 
   const handleDragOver = (event: DragOverEvent) => {
     const { active, over } = event;
@@ -58,6 +59,8 @@ function FolderWidget({ FolderProps }: FolderWidgetProps) {
       />
       <div
         title={name}
+        role="button"
+        onPointerDown={handlePointerDown}
         id={id}
         className="h-full w-full flex items-center justify-center flex-col overflow-hidden box-border animate-wrapper"
       >

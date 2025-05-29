@@ -11,4 +11,18 @@ type FolderWidgetType = {
     hoverPreviewItemIcon?: string | null;
 }
 
+// types.ts
+export interface WidgetItem {
+  id: string;
+  name: string;
+  type: "clock" | "search" | "notes" | "image" | "chatAI" | "todo";
+  component: React.ReactNode; // React component for the widget
+  parent: string; // Optional (e.g., "dock", "main", etc.)
+  width: number; // Optional, for layout purposes
+  height: number; // Optional, for layout purposes
+  x: number; // Optional, for layout purposes
+  y: number; // Optional, for layout purposes
+}
+
+
 export type { SiteItem, FolderType, SiteWidgetType, FolderWidgetType,PageType };

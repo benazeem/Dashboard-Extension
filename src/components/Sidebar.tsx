@@ -15,39 +15,39 @@ function Sidebar({ setShow }: SidebarProps) {
     developer: [
       { name: "Compiler", icon: "compiler", id: "compiler" },
       { name: "Code Editor", icon: "editor", id: "code-editor" },
-      { name: "RegEx Tester", icon: "RegEx", id: "regex-tester" },
-      { name: "JSON Formatter", icon: "json", id: "json-formator" },
-      { name: "UUID Generator", icon: "json", id: "uuid-Generator" },
-      { name: "Hash Generators", icon: "json", id: "hash-generators" },
-      { name: "Snippet Library", icon: "json", id: "snippet-library" },
-      { name: "Markdown Editor", icon: "json", id: "markdown-editor" },
-      { name: "Base64 Encoder/Decoder", icon: "json", id: "base64-encoder-decoder" }
+      // { name: "RegEx Tester", icon: "RegEx", id: "regex-tester" },
+      // { name: "JSON Formatter", icon: "json", id: "json-formator" },
+      // { name: "UUID Generator", icon: "json", id: "uuid-Generator" },
+      // { name: "Hash Generators", icon: "json", id: "hash-generators" },
+      // { name: "Snippet Library", icon: "json", id: "snippet-library" },
+      // { name: "Markdown Editor", icon: "json", id: "markdown-editor" },
+      // { name: "Base64 Encoder/Decoder", icon: "json", id: "base64-encoder-decoder" }
     ],
     designer: [
       { name: "White Board", icon: "layout", id: "white-board" },
       { name: "Color Picker", icon: "palette", id: "color-picker" },
-      { name: "Color Palette Generator", icon: "type", id: "color-palette-generator" },
-      { name: "Image Compressor", icon: "type", id: "image-compressor" },
-      { name: "Font Previewer", icon: "type", id: "font-previewer" },
-      { name: "Gradient Generator", icon: "type", id: "gradient-generator" },
-      { name: "Spacing & Scale Visualizer", icon: "type", id: "spacing-scale-visualizer" },
-      { name: "Typography Tool", icon: "type", id: "typography-tool" },            
-      { name: "CSS Box Shadow Generator", icon: "type", id: "css-box-shadow-generator" },
-      { name: "Lorem Ipsum Generator", icon: "type", id: "lorem-ipsum-generator" }
+      // { name: "Color Palette Generator", icon: "type", id: "color-palette-generator" },
+      // { name: "Image Compressor", icon: "type", id: "image-compressor" },
+      // { name: "Font Previewer", icon: "type", id: "font-previewer" },
+      // { name: "Gradient Generator", icon: "type", id: "gradient-generator" },
+      // { name: "Spacing & Scale Visualizer", icon: "type", id: "spacing-scale-visualizer" },
+      // { name: "Typography Tool", icon: "type", id: "typography-tool" },            
+      // { name: "CSS Box Shadow Generator", icon: "type", id: "css-box-shadow-generator" },
+      // { name: "Lorem Ipsum Generator", icon: "type", id: "lorem-ipsum-generator" }
     ],
-    marketer: [
-      { name: "Google Analytics", icon: "bar-chart", id: "google-analytics" },
-      { name: "DA & PA Checker", icon: "shield", id: "da-pa-checker" },
-      { name: "SEO Analysis Tool", icon: "search", id: "seo-analysis" },
-      { name: "Website Speed Test", icon: "zap", id: "website-speed-test" },
-      { name: "Backlink Checker", icon: "link", id: "backlink-checker" },
-      { name: "Local SEO Checker", icon: "map-pin", id: "local-seo-checker" },
-      { name: "Schema Markup Generator", icon: "code", id: "schema-markup-generator" },
-      { name: "Link Building Tool", icon: "git-branch", id: "link-building-tool" },
-      { name: "Google Search Console", icon: "search-check", id: "google-search-console" },
-      { name: "Keyword Tool", icon: "list", id: "keyword-tool" },
-      { name: "Link Shortener", icon: "scissors", id: "link-shortener" }
-    ]
+    // marketer: [
+    //   { name: "Google Analytics", icon: "bar-chart", id: "google-analytics" },
+    //   { name: "DA & PA Checker", icon: "shield", id: "da-pa-checker" },
+    //   { name: "SEO Analysis Tool", icon: "search", id: "seo-analysis" },
+    //   { name: "Website Speed Test", icon: "zap", id: "website-speed-test" },
+    //   { name: "Backlink Checker", icon: "link", id: "backlink-checker" },
+    //   { name: "Local SEO Checker", icon: "map-pin", id: "local-seo-checker" },
+    //   { name: "Schema Markup Generator", icon: "code", id: "schema-markup-generator" },
+    //   { name: "Link Building Tool", icon: "git-branch", id: "link-building-tool" },
+    //   { name: "Google Search Console", icon: "search-check", id: "google-search-console" },
+    //   { name: "Keyword Tool", icon: "list", id: "keyword-tool" },
+    //   { name: "Link Shortener", icon: "scissors", id: "link-shortener" }
+    // ]
   };
 
   const [selectedProfile, setSelectedProfile] = useState<keyof typeof toolsByProfile>("developer");
